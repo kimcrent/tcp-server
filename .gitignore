@@ -1,0 +1,8 @@
+# Build artifacts
+bin/
+
+# Local Go workspace cache
+pkg/
+
+# OS files
+.DS_Store
