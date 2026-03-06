@@ -8,5 +8,5 @@ FROM gcr.io/distroless/static-debian12:nonroot
 WORKDIR /app
 COPY --from=builder /out/app /app/app
 
-EXPOSE 8080
+EXPOSE 1337
 ENTRYPOINT ["/app/app"]
