@@ -7,9 +7,9 @@ import (
 )
 
 func main() {
-	ln, err := net.Listen("tcp4", ":8080")
+	ln, err := net.Listen("tcp4", ":1337")
 	if err != nil {
-		log.Fatalf("Listner error: %v", err)
+		log.Fatalf("Listener error: %v", err)
 	}
 	defer ln.Close()
 	log.Println("server started on :8080")
@@ -17,7 +17,7 @@ func main() {
 	for {
 		conn, err := ln.Accept()
 		if err != nil {
-			log.Printf("accept error: ,%v", err)
+			log.Printf("accept error: %v", err)
 			continue
 		}
 		go handleConnection(conn)

@@ -4,4 +4,4 @@ services:
     container_name: go-tcp-server
     restart: unless-stopped
     ports:
-      - "8080:8080"
+      - "1337:1337"
