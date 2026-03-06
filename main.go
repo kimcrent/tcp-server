@@ -1,23 +1,23 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net"
 )
 
 func main() {
-	ln, err := net.Listen("tcp4", ":1337")
+	ln, err := net.Listen("tcp", ":1337")
 	if err != nil {
-		log.Fatalf("Listener error: %v", err)
+		log.Fatalf("Error with listen port 1337 %v", err)
 	}
 	defer ln.Close()
-	log.Println("server started on :8080")
+
+	log.Println("Port 1337 listening")
 
 	for {
 		conn, err := ln.Accept()
 		if err != nil {
-			log.Printf("accept error: %v", err)
+			log.Printf("Error, connection with client %v", err)
 			continue
 		}
 		go handleConnection(conn)
@@ -30,15 +30,21 @@ func handleConnection(conn net.Conn) {
 	buffer := make([]byte, 1024)
 
 	for {
-		n, err := conn.Read(buffer)
+		bufferReader, err := conn.Read(buffer)
 		if err != nil {
-			log.Println("read error:", err)
+			log.Printf("Read error %v", err)
 			return
 		}
-		data := buffer[:n]
 
-		fmt.Println("received: ", string(data))
+		data := buffer[:bufferReader]
 
-		conn.Write([]byte("message received\n"))
+		log.Println("Buffer is:", string(data))
+
+		_, err = conn.Write([]byte("Package accept"))
+		if err != nil {
+			log.Printf("Answer error %v", err)
+			return
+		}
 	}
+
 }
