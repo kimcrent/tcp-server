@@ -74,9 +74,9 @@ jobs:
             app:
               image: ${IMAGE_NAME}:${IMAGE_TAG}
               container_name: go-tcp-server
-              restart: unless-stopped
+              restart: always
               ports:
-                - "8080:8080"
+                - "1337:1337"
           COMPOSE
 
           echo "$GHCR_TOKEN" | docker login ghcr.io -u "$GHCR_USERNAME" --password-stdin
