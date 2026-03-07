@@ -40,7 +40,7 @@ func handleConnection(conn net.Conn) {
 
 		log.Println("Buffer is:", string(data))
 
-		_, err = conn.Write([]byte("Package accept"))
+		_, err = conn.Write(data)
 		if err != nil {
 			log.Printf("Answer error %v", err)
 			return
