@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	ln, err := net.Listen("tcp", "1337")
+	ln, err := net.Listen("tcp", ":1337")
 	if err != nil {
 		log.Fatalf("Port listening error %v", err)
 	}
