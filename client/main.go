@@ -9,11 +9,11 @@ import (
 )
 
 func main() {
-	dl, err := net.Dial("tcp", "82.40.38.98:1337")
+	conn, err := net.Dial("tcp", "82.40.38.98:1337")
 	if err != nil {
 		log.Fatalf("Conntion with server error %v", err)
 	}
-	defer dl.Close()
+	defer conn.Close()
 
 	fmt.Println("Server connected")
 
@@ -27,14 +27,14 @@ func main() {
 			log.Fatalf("Input massage error %v", err)
 		}
 
-		_, err = dl.Write([]byte(text))
+		_, err = conn.Write([]byte(text))
 		if err != nil {
 			log.Fatalf("Send massage error %v", err)
 		}
 
 		bufferReader := make([]byte, 1024)
 
-		n, err := dl.Read(bufferReader)
+		n, err := conn.Read(bufferReader)
 		if err != nil {
 			log.Fatalf("Read massge error %v", err)
 		}
